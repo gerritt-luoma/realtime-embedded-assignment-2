@@ -242,7 +242,7 @@ int main(void)
 
 
     printf("sched-example-9-above-LUB-harmonic\nU=%4.2f\% (C1=1, C2=2, C3=4, C4=6; T1=6, T2=8, T3=12, T4=24; T=D): ",
-		   ((1.0/6.0)*100.0 + (2.0/8.0)*100.0 + (4.0/12.0)*100.0 + (6.0/24.0)*100.0)));
+		   ((1.0/6.0)*100.0 + (2.0/8.0)*100.0 + (4.0/12.0)*100.0 + (6.0/24.0)*100.0));
 	numServices = 4;
     if(completion_time_feasibility(numServices, ex9_period, ex9_wcet, ex9_period) == TRUE)
         printf("FEASIBLE\n");
@@ -411,7 +411,7 @@ int main(void)
     
 
     printf("sched-example-9-above-LUB-harmonic\nU=%4.2f\% (C1=1, C2=2, C3=4, C4=6; T1=6, T2=8, T3=12, T4=24; T=D): ",
-		   ((1.0/6.0)*100.0 + (2.0/8.0)*100.0 + (4.0/12.0)*100.0 + (6.0/24.0)*100.0)));
+		   ((1.0/6.0)*100.0 + (2.0/8.0)*100.0 + (4.0/12.0)*100.0 + (6.0/24.0)*100.0));
 	numServices = 4;
     if(scheduling_point_feasibility(numServices, ex8_period, ex8_wcet, ex8_period) == TRUE)
         printf("FEASIBLE\n");
