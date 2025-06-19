@@ -70,6 +70,31 @@ U32_T ex3_wcet[] = {1, 2, 3};
 U32_T ex4_period[] = {2, 4, 16};
 U32_T ex4_wcet[] = {1, 1, 4};
 
+// U=.833
+U32_T ex5_period[] = {2, 5, 15};
+U32_T ex5_wcet[] = {1, 1, 2};
+
+// U=.933
+U32_T ex6_period[] = {3, 5, 15};
+U32_T ex6_wcet[] = {1, 2, 3};
+
+// U=1.20
+U32_T ex7_period[] = {2, 5, 10};
+U32_T ex7_wcet[] = {1, 3, 1};
+
+// U=1.00
+U32_T ex8_period[] = {3, 5, 15};
+U32_T ex8_wcet[] = {1, 2, 4};
+
+// U=1.00
+U32_T ex9_period[] = {6, 8, 12, 24};
+U32_T ex9_wcet[] = {1, 2, 4, 6};
+
+// U=.8929
+U32_T ex10_period[] = {2, 4, 7};
+U32_T ex10_wcet[] = {1, 1, 1};
+
+
 int completion_time_feasibility(U32_T numServices, U32_T period[], U32_T wcet[], U32_T deadline[]);
 int scheduling_point_feasibility(U32_T numServices, U32_T period[], U32_T wcet[], U32_T deadline[]);
 int rate_monotonic_least_upper_bound(U32_T numServices, U32_T period[], U32_T wcet[], U32_T deadline[]);
@@ -156,6 +181,95 @@ int main(void)
     printf("\n");
 
 
+    printf("sched-example-0-feasible-above-LUB-disharmonic\nU=%4.2f\% (C1=1, C2=1, C3=2; T1=2, T2=5, T3=15; T=D): ",
+		   ((1.0/2.0)*100.0 + (1.0/5.0)*100.0 + (2.0/15.0)*100.0));
+	numServices = 3;
+    if(completion_time_feasibility(numServices, ex5_period, ex5_wcet, ex5_period) == TRUE)
+        printf("FEASIBLE\n");
+    else
+        printf("INFEASIBLE\n");
+
+    if(rate_monotonic_least_upper_bound(numServices, ex5_period, ex5_wcet, ex5_period) == TRUE)
+        printf("RM LUB FEASIBLE\n");
+    else
+        printf("RM LUB INFEASIBLE\n");
+    printf("\n");
+
+
+    printf("sched-example-3-above-LUB-harmonic\nU=%4.2f\% (C1=1, C2=2, C3=3; T1=3, T2=5, T3=15; T=D): ",
+		   ((1.0/3.0)*100.0 + (2.0/5.0)*100.0 + (3.0/15.0)*100.0));
+	numServices = 3;
+    if(completion_time_feasibility(numServices, ex6_period, ex6_wcet, ex6_period) == TRUE)
+        printf("FEASIBLE\n");
+    else
+        printf("INFEASIBLE\n");
+
+    if(rate_monotonic_least_upper_bound(numServices, ex6_period, ex6_wcet, ex6_period) == TRUE)
+        printf("RM LUB FEASIBLE\n");
+    else
+        printf("RM LUB INFEASIBLE\n");
+    printf("\n");
+
+
+    printf("sched-example-5-2-above-LUB-harmonic-OVERLOAD\nU=%4.2f\% (C1=1, C2=3, C3=1; T1=2, T2=5, T3=10; T=D): ",
+		   ((1.0/2.0)*100.0 + (3.0/5.0)*100.0 + (1.0/10.0)*100.0));
+	numServices = 3;
+    if(completion_time_feasibility(numServices, ex7_period, ex7_wcet, ex7_period) == TRUE)
+        printf("FEASIBLE\n");
+    else
+        printf("INFEASIBLE\n");
+
+    if(rate_monotonic_least_upper_bound(numServices, ex7_period, ex7_wcet, ex7_period) == TRUE)
+        printf("RM LUB FEASIBLE\n");
+    else
+        printf("RM LUB INFEASIBLE\n");
+    printf("\n");
+
+
+    printf("sched-example-7-1-above-LUB-harmonic-EDF-and-LLF-difference\nU=%4.2f\% (C1=1, C2=2, C3=4; T1=3, T2=5, T3=15; T=D): ",
+		   ((1.0/3.0)*100.0 + (2.0/5.0)*100.0 + (4.0/15.0)*100.0));
+	numServices = 3;
+    if(completion_time_feasibility(numServices, ex8_period, ex8_wcet, ex8_period) == TRUE)
+        printf("FEASIBLE\n");
+    else
+        printf("INFEASIBLE\n");
+
+    if(rate_monotonic_least_upper_bound(numServices, ex8_period, ex8_wcet, ex8_period) == TRUE)
+        printf("RM LUB FEASIBLE\n");
+    else
+        printf("RM LUB INFEASIBLE\n");
+    printf("\n");
+
+
+    printf("sched-example-9-above-LUB-harmonic\nU=%4.2f\% (C1=1, C2=2, C3=4, C4=6; T1=6, T2=8, T3=12, T4=24; T=D): ",
+		   ((1.0/6.0)*100.0 + (2.0/8.0)*100.0 + (4.0/12.0)*100.0 + (6.0/24.0)*100.0)));
+	numServices = 4;
+    if(completion_time_feasibility(numServices, ex9_period, ex9_wcet, ex9_period) == TRUE)
+        printf("FEASIBLE\n");
+    else
+        printf("INFEASIBLE\n");
+
+    if(rate_monotonic_least_upper_bound(numServices, ex9_period, ex9_wcet, ex9_period) == TRUE)
+        printf("RM LUB FEASIBLE\n");
+    else
+        printf("RM LUB INFEASIBLE\n");
+    printf("\n");
+
+    
+    printf("sched-example-14-1-above-LUB\nU=%4.2f\% (C1=1, C2=1, C3=1; T1=2, T2=4, T3=7; T=D): ",
+		   ((1.0/2.0)*100.0 + (1.0/4.0)*100.0 + (1.0/7.0)*100.0));
+	numServices = 3;
+    if(completion_time_feasibility(numServices, ex10_period, ex10_wcet, ex10_period) == TRUE)
+        printf("FEASIBLE\n");
+    else
+        printf("INFEASIBLE\n");
+
+    if(rate_monotonic_least_upper_bound(numServices, ex10_period, ex10_wcet, ex10_period) == TRUE)
+        printf("RM LUB FEASIBLE\n");
+    else
+        printf("RM LUB INFEASIBLE\n");
+    printf("\n");
+
 
     printf("\n\n");
     printf("******** Scheduling Point Feasibility Example\n");
@@ -235,6 +349,95 @@ int main(void)
         printf("RM LUB INFEASIBLE\n");
     printf("\n");
 
+    
+    printf("sched-example-0-feasible-above-LUB-disharmonic\nU=%4.2f\% (C1=1, C2=1, C3=2; T1=2, T2=5, T3=15; T=D): ",
+		   ((1.0/2.0)*100.0 + (1.0/5.0)*100.0 + (2.0/15.0)*100.0));
+	numServices = 3;
+    if(scheduling_point_feasibility(numServices, ex5_period, ex5_wcet, ex5_period) == TRUE)
+        printf("FEASIBLE\n");
+    else
+        printf("INFEASIBLE\n");
+
+    if(rate_monotonic_least_upper_bound(numServices, ex5_period, ex5_wcet, ex5_period) == TRUE)
+        printf("RM LUB FEASIBLE\n");
+    else
+        printf("RM LUB INFEASIBLE\n");
+    printf("\n");
+
+    
+    printf("sched-example-3-above-LUB-harmonic\nU=%4.2f\% (C1=1, C2=1, C3=2; T1=2, T2=5, T3=15; T=D): ",
+		   ((1.0/3.0)*100.0 + (2.0/5.0)*100.0 + (3.0/15.0)*100.0));
+	numServices = 3;
+    if(scheduling_point_feasibility(numServices, ex6_period, ex6_wcet, ex6_period) == TRUE)
+        printf("FEASIBLE\n");
+    else
+        printf("INFEASIBLE\n");
+
+    if(rate_monotonic_least_upper_bound(numServices, ex6_period, ex6_wcet, ex6_period) == TRUE)
+        printf("RM LUB FEASIBLE\n");
+    else
+        printf("RM LUB INFEASIBLE\n");
+    printf("\n");
+
+    
+    printf("sched-example-5-2-above-LUB-harmonic-OVERLOAD\nU=%4.2f\% (C1=1, C2=1, C3=2; T1=2, T2=5, T3=15; T=D): ",
+		   ((1.0/2.0)*100.0 + (3.0/5.0)*100.0 + (1.0/10.0)*100.0));
+	numServices = 3;
+    if(scheduling_point_feasibility(numServices, ex7_period, ex7_wcet, ex7_period) == TRUE)
+        printf("FEASIBLE\n");
+    else
+        printf("INFEASIBLE\n");
+
+    if(rate_monotonic_least_upper_bound(numServices, ex7_period, ex7_wcet, ex7_period) == TRUE)
+        printf("RM LUB FEASIBLE\n");
+    else
+        printf("RM LUB INFEASIBLE\n");
+    printf("\n");
+
+    
+    printf("sched-example-7-1-above-LUB-harmonic-EDF-and-LLF-difference\nU=%4.2f\% (C1=1, C2=1, C3=2; T1=2, T2=5, T3=15; T=D): ",
+		   ((1.0/3.0)*100.0 + (2.0/5.0)*100.0 + (4.0/15.0)*100.0));
+	numServices = 3;
+    if(scheduling_point_feasibility(numServices, ex8_period, ex8_wcet, ex8_period) == TRUE)
+        printf("FEASIBLE\n");
+    else
+        printf("INFEASIBLE\n");
+
+    if(rate_monotonic_least_upper_bound(numServices, ex8_period, ex8_wcet, ex8_period) == TRUE)
+        printf("RM LUB FEASIBLE\n");
+    else
+        printf("RM LUB INFEASIBLE\n");
+    printf("\n");
+    
+
+    printf("sched-example-9-above-LUB-harmonic\nU=%4.2f\% (C1=1, C2=2, C3=4, C4=6; T1=6, T2=8, T3=12, T4=24; T=D): ",
+		   ((1.0/6.0)*100.0 + (2.0/8.0)*100.0 + (4.0/12.0)*100.0 + (6.0/24.0)*100.0)));
+	numServices = 4;
+    if(scheduling_point_feasibility(numServices, ex8_period, ex8_wcet, ex8_period) == TRUE)
+        printf("FEASIBLE\n");
+    else
+        printf("INFEASIBLE\n");
+
+    if(rate_monotonic_least_upper_bound(numServices, ex8_period, ex8_wcet, ex8_period) == TRUE)
+        printf("RM LUB FEASIBLE\n");
+    else
+        printf("RM LUB INFEASIBLE\n");
+    printf("\n");
+    
+    
+    printf("sched-example-14-1-above-LUB\nU=%4.2f\% (C1=1, C2=1, C3=1; T1=2, T2=4, T3=7; T=D): ",
+		   ((1.0/2.0)*100.0 + (1.0/4.0)*100.0 + (1.0/7.0)*100.0));
+	numServices = 3;
+    if(scheduling_point_feasibility(numServices, ex10_period, ex10_wcet, ex10_period) == TRUE)
+        printf("FEASIBLE\n");
+    else
+        printf("INFEASIBLE\n");
+
+    if(rate_monotonic_least_upper_bound(numServices, ex10_period, ex10_wcet, ex10_period) == TRUE)
+        printf("RM LUB FEASIBLE\n");
+    else
+        printf("RM LUB INFEASIBLE\n");
+    printf("\n");
 }
 
 
