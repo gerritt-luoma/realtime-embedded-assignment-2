@@ -255,7 +255,7 @@ int main(void)
         printf("RM LUB INFEASIBLE\n");
     printf("\n");
 
-    
+
     printf("sched-example-14-1-above-LUB\nU=%4.2f\% (C1=1, C2=1, C3=1; T1=2, T2=4, T3=7; T=D): ",
 		   ((1.0/2.0)*100.0 + (1.0/4.0)*100.0 + (1.0/7.0)*100.0));
 	numServices = 3;
@@ -349,7 +349,7 @@ int main(void)
         printf("RM LUB INFEASIBLE\n");
     printf("\n");
 
-    
+
     printf("sched-example-0-feasible-above-LUB-disharmonic\nU=%4.2f\% (C1=1, C2=1, C3=2; T1=2, T2=5, T3=15; T=D): ",
 		   ((1.0/2.0)*100.0 + (1.0/5.0)*100.0 + (2.0/15.0)*100.0));
 	numServices = 3;
@@ -364,7 +364,7 @@ int main(void)
         printf("RM LUB INFEASIBLE\n");
     printf("\n");
 
-    
+
     printf("sched-example-3-above-LUB-harmonic\nU=%4.2f\% (C1=1, C2=1, C3=2; T1=2, T2=5, T3=15; T=D): ",
 		   ((1.0/3.0)*100.0 + (2.0/5.0)*100.0 + (3.0/15.0)*100.0));
 	numServices = 3;
@@ -379,7 +379,7 @@ int main(void)
         printf("RM LUB INFEASIBLE\n");
     printf("\n");
 
-    
+
     printf("sched-example-5-2-above-LUB-harmonic-OVERLOAD\nU=%4.2f\% (C1=1, C2=1, C3=2; T1=2, T2=5, T3=15; T=D): ",
 		   ((1.0/2.0)*100.0 + (3.0/5.0)*100.0 + (1.0/10.0)*100.0));
 	numServices = 3;
@@ -394,7 +394,7 @@ int main(void)
         printf("RM LUB INFEASIBLE\n");
     printf("\n");
 
-    
+
     printf("sched-example-7-1-above-LUB-harmonic-EDF-and-LLF-difference\nU=%4.2f\% (C1=1, C2=1, C3=2; T1=2, T2=5, T3=15; T=D): ",
 		   ((1.0/3.0)*100.0 + (2.0/5.0)*100.0 + (4.0/15.0)*100.0));
 	numServices = 3;
@@ -408,7 +408,7 @@ int main(void)
     else
         printf("RM LUB INFEASIBLE\n");
     printf("\n");
-    
+
 
     printf("sched-example-9-above-LUB-harmonic\nU=%4.2f\% (C1=1, C2=2, C3=4, C4=6; T1=6, T2=8, T3=12, T4=24; T=D): ",
 		   ((1.0/6.0)*100.0 + (2.0/8.0)*100.0 + (4.0/12.0)*100.0 + (6.0/24.0)*100.0));
@@ -423,8 +423,8 @@ int main(void)
     else
         printf("RM LUB INFEASIBLE\n");
     printf("\n");
-    
-    
+
+
     printf("sched-example-14-1-above-LUB\nU=%4.2f\% (C1=1, C2=1, C3=1; T1=2, T2=4, T3=7; T=D): ",
 		   ((1.0/2.0)*100.0 + (1.0/4.0)*100.0 + (1.0/7.0)*100.0));
 	numServices = 3;
