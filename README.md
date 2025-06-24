@@ -264,15 +264,77 @@ EDF and LLF diverge at the 12th time slice when S3 having a lower Laxity than S2
 
 ![sched-example-7-1-above-LUB-harmonic-EDF-and-LLF-difference](./assets/problem-3/sched-example-7-1-above-LUB-harmonic-EDF-and-LLF-difference/sched-example-7-1-above-LUB-harmonic-EDF-and-LLF-difference.PNG)
 
-For the fifth example I picked I chose `sched-example-9-above-LUB-harmonic` which defines 4 tasks as such: `C1=1, C2=2, C3=4, C4=6; T1=6, T2=8, T3=12, T4=24; T=D`.  The total utility of the tasks is `100%` while the LUB is `75.68%`.  When running the test
+For the fifth example I picked I chose `sched-example-15-above-LUB-harmonic-EDF-and-LLF-difference` which defines 3 tasks as such: `C1=2, C2=3, C3=4; T1=5, T2=9, T3=15; T=D`.  The total utility of the tasks is `100%` while the LUB is `77.97%`.  When running the test RM tests you find that they are not schedulable as the third service, S3, misses its deadline by having a worst case response time of 18 while its deadline is 15.  This can be seen in the Cheddar output below.
 
-# TODO: FIX ME I USED THE WRONG VALUE
+![sched-example-15-above-LUB-harmonic-EDF-and-LLF-difference](./assets/problem-3/sched-example-15-above-LUB-harmonic-EDF-and-LLF-difference/sched-example-15-above-LUB-harmonic-EDF-and-LLF-difference-RM.PNG)
 
-# TODO: REPLACE LAST TEST WITH ONE THAT FAILS RM BUT NOT EDF OR LLF
+The result of the altered feasibility test set agrees with this analysis with the following output:
+
+```c
+******** Completion Test Feasibility Example
+sched-example-15-above-LUB-harmonic-EDF-and-LLF-difference
+U=100.00% (C1=2, C2=3, C3=4; T1=5, T2=9, T3=15; T=D): INFEASIBLE
+for 3, utility_sum = 0.000000
+for 0, wcet=2.000000, period=5.000000, utility_sum = 0.400000
+for 1, wcet=3.000000, period=9.000000, utility_sum = 0.733333
+for 2, wcet=4.000000, period=15.000000, utility_sum = 1.000000
+utility_sum = 1.000000
+LUB = 0.779763
+RM LUB INFEASIBLE
+
+******** Scheduling Point Feasibility Example
+sched-example-15-above-LUB-harmonic-EDF-and-LLF-difference
+U=100.00% (C1=2, C2=3, C3=4; T1=5, T2=9, T3=15; T=D): INFEASIBLE
+for 3, utility_sum = 0.000000
+for 0, wcet=2.000000, period=5.000000, utility_sum = 0.400000
+for 1, wcet=3.000000, period=9.000000, utility_sum = 0.733333
+for 2, wcet=4.000000, period=15.000000, utility_sum = 1.000000
+utility_sum = 1.000000
+LUB = 0.779763
+RM LUB INFEASIBLE
+```
+
+When using cheddar to perform analysis on the feasibility of EDF, it is found that over the LCM of the system that it is schedulable.  The worst case response time of each task is found to be their periods.  This can be seen below:
+
+![sched-example-15-above-LUB-harmonic-EDF-and-LLF-difference](./assets/problem-3/sched-example-15-above-LUB-harmonic-EDF-and-LLF-difference/sched-example-15-above-LUB-harmonic-EDF-and-LLF-difference-EDF.PNG)
+
+When using Cheddar to perform analysis on the feasibility of LLF, it reports that the system is sechedulable based on worst case response time but when performing a simulation of the schedule, S3 is unschedulable due to its worst response time in the simulation being 19 while its deadline is 15.  This can be seen below in the image:
+
+![sched-example-15-above-LUB-harmonic-EDF-and-LLF-difference](./assets/problem-3/sched-example-15-above-LUB-harmonic-EDF-and-LLF-difference/sched-example-15-above-LUB-harmonic-EDF-and-LLF-difference-LLF.PNG)
+
+The sixth and final example that I picked was `sched-example-14-1-above-LUB` with a set of services defined with: `C1=1, C2=1, C3=1; T1=2, T2=4, T3=7; T=D`.  The services have a total utility of `89.28%` which is above the LUB of `77.97%`.  Despite being over the LUB, the services pass both the Scheduling Point and the Completion test with an output seen below:
+
+```c
+******** Completion Test Feasibility Example
+sched-example-14-1-above-LUB
+U=89.29% (C1=1, C2=1, C3=1; T1=2, T2=4, T3=7; T=D): FEASIBLE
+for 3, utility_sum = 0.000000
+for 0, wcet=1.000000, period=2.000000, utility_sum = 0.500000
+for 1, wcet=1.000000, period=4.000000, utility_sum = 0.750000
+for 2, wcet=1.000000, period=7.000000, utility_sum = 0.892857
+utility_sum = 0.892857
+LUB = 0.779763
+RM LUB INFEASIBLE
+
+******** Scheduling Point Feasibility Example
+sched-example-14-1-above-LUB
+U=89.29% (C1=1, C2=1, C3=1; T1=2, T2=4, T3=7; T=D): FEASIBLE
+for 3, utility_sum = 0.000000
+for 0, wcet=1.000000, period=2.000000, utility_sum = 0.500000
+for 1, wcet=1.000000, period=4.000000, utility_sum = 0.750000
+for 2, wcet=1.000000, period=7.000000, utility_sum = 0.892857
+utility_sum = 0.892857
+LUB = 0.779763
+RM LUB INFEASIBLE
+```
+
+The RM Cheddar analysis agrees with the output of the feasibility tests showing that the worst case response times of the services are 1, 2, and 4, respectively.  There is also enough time laxity in the system for it to have slack as seen in the chedar image below:
+
+![sched-example-14-1-above-LUB](./assets/problem-3/sched-example-14-1-above-LUB/sched-example-14-1-above-LUB-RM.PNG)
 
 > C: Does your modified feasibility code agree with Cheddar analysis for additional cases? Why or why not?
 
-TODO:
+The Cheddar analysis appears to agree with the modified `feasibility_tests.c` file.  On all of the chosen examples the utilization, LUB, and worst case analysis result in the same findings.
 
 > Read Chapter 3 of the textbook.
 
