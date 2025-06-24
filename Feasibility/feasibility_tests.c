@@ -83,12 +83,12 @@ U32_T ex7_period[] = {2, 5, 10};
 U32_T ex7_wcet[] = {1, 3, 1};
 
 // U=1.00
-U32_T ex8_period[] = {3, 5, 15};
-U32_T ex8_wcet[] = {1, 2, 4};
+U32_T ex8_period[] = {5, 9, 15};
+U32_T ex8_wcet[] = {2, 3, 4};
 
 // U=1.00
-U32_T ex9_period[] = {6, 8, 12, 24};
-U32_T ex9_wcet[] = {1, 2, 4, 6};
+U32_T ex9_period[] = {5, 9, 15};
+U32_T ex9_wcet[] = {2, 3, 4};
 
 // U=.8929
 U32_T ex10_period[] = {2, 4, 7};
@@ -241,9 +241,9 @@ int main(void)
     printf("\n");
 
 
-    printf("sched-example-9-above-LUB-harmonic\nU=%4.2f\% (C1=1, C2=2, C3=4, C4=6; T1=6, T2=8, T3=12, T4=24; T=D): ",
-		   ((1.0/6.0)*100.0 + (2.0/8.0)*100.0 + (4.0/12.0)*100.0 + (6.0/24.0)*100.0));
-	numServices = 4;
+    printf("sched-example-15-above-LUB-harmonic-EDF-and-LLF-difference\nU=%4.2f\% (C1=2, C2=3, C3=4; T1=5, T2=9, T3=15; T=D): ",
+		   ((2.0/5.0)*100.0 + (3.0/9.0)*100.0 + (4.0/15.0)*100.0));
+	numServices = 3;
     if(completion_time_feasibility(numServices, ex9_period, ex9_wcet, ex9_period) == TRUE)
         printf("FEASIBLE\n");
     else
@@ -410,15 +410,15 @@ int main(void)
     printf("\n");
 
 
-    printf("sched-example-9-above-LUB-harmonic\nU=%4.2f\% (C1=1, C2=2, C3=4, C4=6; T1=6, T2=8, T3=12, T4=24; T=D): ",
-		   ((1.0/6.0)*100.0 + (2.0/8.0)*100.0 + (4.0/12.0)*100.0 + (6.0/24.0)*100.0));
-	numServices = 4;
-    if(scheduling_point_feasibility(numServices, ex8_period, ex8_wcet, ex8_period) == TRUE)
+    printf("sched-example-15-above-LUB-harmonic-EDF-and-LLF-difference\nU=%4.2f\% (C1=2, C2=3, C3=4; T1=5, T2=9, T3=15; T=D): ",
+		   ((2.0/5.0)*100.0 + (3.0/9.0)*100.0 + (4.0/15.0)*100.0));
+	numServices = 3;
+    if(scheduling_point_feasibility(numServices, ex9_period, ex9_wcet, ex9_period) == TRUE)
         printf("FEASIBLE\n");
     else
         printf("INFEASIBLE\n");
 
-    if(rate_monotonic_least_upper_bound(numServices, ex8_period, ex8_wcet, ex8_period) == TRUE)
+    if(rate_monotonic_least_upper_bound(numServices, ex9_period, ex9_wcet, ex9_period) == TRUE)
         printf("RM LUB FEASIBLE\n");
     else
         printf("RM LUB INFEASIBLE\n");
